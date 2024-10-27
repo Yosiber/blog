@@ -1,28 +1,38 @@
-package com.example.my.personal.blog.entity;
+package com.example.my.personal.blog.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.time.LocalDateTime;
+
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tbl_comment")
+@NoArgsConstructor
+@Data
+@Table(
+        name = "tbl_comments"
+)
 public class CommentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String content;
-    private String createAt;
+    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(columnDefinition = "TEXT")
+    private String content;
+    private LocalDateTime createdAt;
+
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "post_id")
     private PostEntity post;
 }

@@ -20,7 +20,7 @@ public class PostEntity {
     public long id;
     public String title;
     public String content;
-    public String createAt;
+    public String createdAt;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "user_id")
