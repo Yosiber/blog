@@ -9,10 +9,7 @@ import com.example.my.personal.blog.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.ui.Model;
 
@@ -71,4 +68,22 @@ public class PostController {
         return "/posts/my-posts";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editPost(@PathVariable Long id, Model model) {
+        PostEntity posts = postService.getPostById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Post Id"));
+        model.addAttribute("posts", posts);
+        return "/posts/update-posts";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(@RequestParam("idPosts") Long id, PostEntity posts) {
+        postService.updatePost(id, posts);
+        return "redirect:/posts/mine";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable Long id) {
+        postService.deletePostById(id);
+        return "redirect:/posts/mine";
+    }
 }

@@ -20,6 +20,8 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     public String title;
+
+    @Column(columnDefinition = "TEXT")
     public String content;
     public LocalDateTime createdAt;
 
