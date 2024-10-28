@@ -5,6 +5,11 @@
     <title>home</title>
     <!--- Bootstrap CSS --->
     <link th:href="@{/Bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <style>
+        body {
+            background-color: #8d9294;
+        }
+    </style>
 </head>
 <body>
     <!--- HEADER --->
@@ -21,7 +26,7 @@
                     <div class="card-body">
                         <h5 class="card-title" th:text="${posts.title}"></h5>
                         <p class="card-text" th:text="${posts.content}"></p>
-                        <a href="#" class="btn btn-secondary float-end mt-2">Read More</a>
+                        <a th:href="@{/posts/postPage/{id}(id=${posts.id})}" class="btn btn-secondary float-end mt-2">Read More</a>
                     </div>
                 </div>
             </div>
