@@ -16,9 +16,9 @@
             <h3 class="card-title" th:text="${posts.title}"></h3>
             <p class="card-text" th:text="${posts.createdAt}"></p>
             <p class="card-text" th:text="${posts.content}"></p>
-            <a th:href="@{/posts/postPage/{id}(id=${posts.id})}" class="btn btn-primary me-2">See</a>
-            <a th:href="@{/posts/edit/{id}(id=${posts.id})}" class="btn btn-warning me-2">Edit</a>
-            <a th:href="@{/posts/delete/{id}(id=${posts.id})}" class="btn btn-danger float-end">Delete</a>
+            <a th:href="@{/posts/postPage/{id}(id=${posts.id})}" class="btn btn-primary me-2"><img src="/img/see.png" alt="see"></a>
+            <a th:href="@{/posts/edit/{id}(id=${posts.id})}" class="btn btn-warning me-2"><img src="/img/edit.png" alt="edit"></a>
+            <a th:href="@{/posts/delete/{id}(id=${posts.id})}" class="btn btn-danger float-end"><img src="/img/delete.png" alt="delete"></a>
         </div>
     </div>
 </div>
