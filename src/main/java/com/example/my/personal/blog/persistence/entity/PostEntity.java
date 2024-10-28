@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class PostEntity {
     public long id;
     public String title;
     public String content;
-    public String createdAt;
+    public LocalDateTime createdAt;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "user_id")
