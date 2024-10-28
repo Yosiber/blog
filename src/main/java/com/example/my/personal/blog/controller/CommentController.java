@@ -11,9 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import jdk.jfr.Registered;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.stream.events.Comment;
 import java.time.LocalDateTime;
@@ -44,4 +43,29 @@ public class CommentController {
         commentService.createComment(comment);
         return "redirect:/posts/postPage/" + postId;
     }
+
+    @GetMapping("/edit/{id}")
+    public String editComment(@PathVariable Long id, Model model) {
+        CommentEntity comment = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
+        model.addAttribute("comment", comment);
+        return "/posts/update-comment";
+    }
+
+    @PostMapping("/update")
+    public String updateComment(@RequestParam("IdComment") Long id, CommentEntity comment) {
+        CommentEntity commentDB = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("Invalid comment id"));
+        commentDB.setContent(comment.getContent());
+        commentService.updateComment(id, commentDB);
+        return "redirect:/posts/postPage/" + commentDB.getPost().getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteComment(@PathVariable Long id) {
+        CommentEntity comment = commentService.getCommentById(id).orElseThrow(() -> new IllegalArgumentException("¡Invalid comment id!"));
+        commentService.deleteComment(id);
+        return "redirect:/posts/postPage/" + comment.getPost().getId();
+    }
+
+
 }
+

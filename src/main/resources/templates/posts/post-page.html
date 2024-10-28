@@ -32,8 +32,8 @@
             <p class="mb-0" th:text="${comment.content}">Content</p>
             <!-- buttons -->
             <div th:if="${ user != null && user.id == comment.user.id}">
-              <a class="btn btn-sm btn-warning me-1" href="#">edit</a>
-              <a class="btn btn-sm btn-danger me-1" href="#">delete</a>
+              <a class="btn btn-sm btn-warning me-1" th:href="@{/comment/edit/{id}(id=${comment.id})}">edit</a>
+              <a class="btn btn-sm btn-danger me-1" th:href="@{/comment/delete/{id}(id=${comment.id})}">delete</a>
             </div>
           </div>
         </li>
@@ -41,16 +41,21 @@
     </div>
 
     <div class="card-footer">
-        <form th:action="@{/comment/addComment}" method="post">
-          <div class="mb-3">
-            <input type="hidden" name="postId" th:value="${posts.id}" />
-            <label for="content" class="form-label">Add a comment:</label>
-            <textarea class="form-control" id="content" name="content" rows="3" autocomplete="off"></textarea>
-          </div>
-          <div class="text-end">
-            <button type="submit" class="btn btn-secondary">Comment</button>>
+      <form th:action="@{/comment/addComment}" method="post">
+        <div class="mb-3">
+          <input type="hidden" name="postId" th:value="${posts.id}" />
+          <label for="content" class="form-label">Add a comment:</label>
+          <textarea class="form-control" id="content" name="content" rows="3" autocomplete="off"></textarea>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-secondary">Comment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <!-- BOOTSTRAP JS -->
 <script th:src="@{/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
 </body>
 </html>
